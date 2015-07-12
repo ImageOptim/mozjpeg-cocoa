@@ -24,7 +24,7 @@
  * bytes of storage, whether actually used in an image or not.)
  */
 
-#define MAX_COMPONENTS  10      /* maximum number of image components */
+#define MAX_COMPONENTS  8      /* maximum number of image components */
 
 
 /*
@@ -235,7 +235,7 @@ typedef int boolean;
 /* Capability options common to encoder and decoder: */
 
 #define DCT_ISLOW_SUPPORTED     /* accurate integer method */
-#define DCT_IFAST_SUPPORTED     /* less accurate int method [legacy feature] */
+#undef DCT_IFAST_SUPPORTED     /* faster, less accurate integer method */
 #define DCT_FLOAT_SUPPORTED     /* floating-point method [legacy feature] */
 
 /* Encoder capability options: */
@@ -251,19 +251,19 @@ typedef int boolean;
  * The exact same statements apply for progressive JPEG: the default tables
  * don't work for progressive mode.  (This may get fixed, however.)
  */
-#define INPUT_SMOOTHING_SUPPORTED   /* Input image smoothing option? */
+#undef INPUT_SMOOTHING_SUPPORTED   /* Input image smoothing option? */
 
 /* Decoder capability options: */
 
 #define D_MULTISCAN_FILES_SUPPORTED /* Multiple-scan JPEG files? */
 #define D_PROGRESSIVE_SUPPORTED     /* Progressive JPEG? (Requires MULTISCAN)*/
 #define SAVE_MARKERS_SUPPORTED      /* jpeg_save_markers() needed? */
-#define BLOCK_SMOOTHING_SUPPORTED   /* Block smoothing? (Progressive only) */
-#define IDCT_SCALING_SUPPORTED      /* Output rescaling via IDCT? */
+#undef BLOCK_SMOOTHING_SUPPORTED   /* Block smoothing? (Progressive only) */
+#undef IDCT_SCALING_SUPPORTED      /* Output rescaling via IDCT? */
 #undef  UPSAMPLE_SCALING_SUPPORTED  /* Output rescaling at upsample stage? */
-#define UPSAMPLE_MERGING_SUPPORTED  /* Fast path for sloppy upsampling? */
-#define QUANT_1PASS_SUPPORTED       /* 1-pass color quantization? */
-#define QUANT_2PASS_SUPPORTED       /* 2-pass color quantization? */
+#undef UPSAMPLE_MERGING_SUPPORTED  /* Fast path for sloppy upsampling? */
+#undef QUANT_1PASS_SUPPORTED       /* 1-pass color quantization? */
+#undef QUANT_2PASS_SUPPORTED       /* 2-pass color quantization? */
 
 /* more capability options later, no doubt */
 
