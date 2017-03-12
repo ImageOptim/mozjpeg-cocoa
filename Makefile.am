@@ -124,10 +124,17 @@ else
 cjpeg_CFLAGS += -DBMP_SUPPORTED -DTARGA_SUPPORTED
 endif
 
+if HAVE_COCOA
+cjpeg_CFLAGS += -DCOCOA_SUPPORTED
+cjpeg_OBJCFLAGS = -DCOCOA_SUPPORTED
+cjpeg_LDFLAGS = -framework Cocoa
+cjpeg_SOURCES += rdcocoa.m
+else
 if HAVE_LIBPNG
 cjpeg_CFLAGS += -DPNG_SUPPORTED $(libpng_CFLAGS)
 cjpeg_LDADD += $(libpng_LIBS)
 cjpeg_SOURCES += rdpng.c
+endif
 endif
 
 djpeg_SOURCES = cdjpeg.h cderror.h cdjpeg.c djpeg.c rdcolmap.c rdswitch.c \

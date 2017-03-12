@@ -22,6 +22,7 @@ AC_PROG_INSTALL
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_PROG_LIBTOOL
 AC_PROG_LN_S
+AC_PROG_OBJC
 
 AC_ARG_WITH([build-date], [Use custom build string to enable reproducible builds (default: YYMMDD)],
   [BUILD="$with_build_date"],
@@ -110,6 +111,26 @@ PKG_CHECK_MODULES([libpng], [libpng], [HAVE_LIBPNG=1], [
   PKG_CHECK_MODULES([libpng], [libpng12], [HAVE_LIBPNG=1], [HAVE_LIBPNG=0])
 ])
 AM_CONDITIONAL([HAVE_LIBPNG], [test "$HAVE_LIBPNG" -eq 1])
+
+
+ljt_have_cocoa=no
+
+save_CFLAGS="$CFLAGS"
+CFLAGS="$CFLAGS -x objective-c"
+AC_PROG_OBJC([clang gcc])
+AC_LANG_PUSH([Objective C])
+
+AC_MSG_CHECKING([for macOS Cocoa support])
+AC_TRY_COMPILE([
+  #import <Cocoa/Cocoa.h>
+], [], [ljt_have_cocoa=yes])
+
+AC_LANG_POP([Objective C])
+CFLAGS="$save_CFLAGS"
+
+AC_MSG_RESULT([$ljt_have_cocoa])
+
+AM_CONDITIONAL([HAVE_COCOA], [test "$ljt_have_cocoa" = "yes"])
 
 # Checks for header files.
 AC_HEADER_STDC
