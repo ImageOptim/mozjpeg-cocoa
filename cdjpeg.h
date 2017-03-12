@@ -123,6 +123,7 @@ EXTERN(cjpeg_source_ptr) jinit_read_ppm(j_compress_ptr cinfo);
 EXTERN(djpeg_dest_ptr) jinit_write_ppm(j_decompress_ptr cinfo);
 EXTERN(cjpeg_source_ptr) jinit_read_targa(j_compress_ptr cinfo);
 EXTERN(djpeg_dest_ptr) jinit_write_targa(j_decompress_ptr cinfo);
+EXTERN(cjpeg_source_ptr) jinit_read_cocoa (j_compress_ptr cinfo);
 
 /* cjpeg support routines (in rdswitch.c) */
 

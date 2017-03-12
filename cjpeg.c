@@ -83,6 +83,9 @@ static boolean copy_markers;
 LOCAL(cjpeg_source_ptr)
 select_file_type(j_compress_ptr cinfo, FILE *infile)
 {
+#ifdef COCOA_SUPPORTED
+    return jinit_read_cocoa(cinfo);
+#else
   int c;
 
   if (is_targa) {
@@ -130,6 +133,7 @@ select_file_type(j_compress_ptr cinfo, FILE *infile)
   }
 
   return NULL;                  /* suppress compiler warnings */
+#endif
 }
 
 
